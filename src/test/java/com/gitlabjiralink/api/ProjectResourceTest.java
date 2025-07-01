@@ -52,6 +52,15 @@ class ProjectResourceTest {
             .delete("/api/projects/" + id)
         .then()
             .statusCode(404);
+
+        // update not found
+        given()
+            .contentType(ContentType.JSON)
+            .body(makeMapping(id, "a", "b"))
+        .when()
+            .put("/api/projects/" + id)
+        .then()
+            .statusCode(404);
     }
 
     private static ProjectMapping makeMapping(Long id, String gitlab, String jira) {
