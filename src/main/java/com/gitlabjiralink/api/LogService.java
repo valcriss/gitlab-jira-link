@@ -1,21 +1,27 @@
 package com.gitlabjiralink.api;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 @ApplicationScoped
 public class LogService {
-    private final List<LogEntry> logs = new CopyOnWriteArrayList<>();
+
+    @Inject
+    LogRepository repository;
 
     public List<LogEntry> list() {
-        return new ArrayList<>(logs);
+        return repository.listAll();
     }
 
+    @Transactional
     public void log(String message) {
-        logs.add(new LogEntry(Instant.now(), message));
+        LogEntry entry = new LogEntry();
+        entry.timestamp = Instant.now();
+        entry.message = message;
+        repository.persist(entry);
     }
 }

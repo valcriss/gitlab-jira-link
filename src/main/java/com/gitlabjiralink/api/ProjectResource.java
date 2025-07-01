@@ -24,7 +24,7 @@ public class ProjectResource {
     @POST
     public Response add(ProjectMapping mapping) {
         ProjectMapping stored = service.add(mapping);
-        return Response.created(URI.create("/api/projects/" + stored.id())).entity(stored).build();
+        return Response.created(URI.create("/api/projects/" + stored.id)).entity(stored).build();
     }
 
     @PUT

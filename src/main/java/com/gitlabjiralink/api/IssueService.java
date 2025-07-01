@@ -1,20 +1,23 @@
 package com.gitlabjiralink.api;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 @ApplicationScoped
 public class IssueService {
-    private final List<IssueLink> links = new CopyOnWriteArrayList<>();
+
+    @Inject
+    IssueRepository repository;
 
     public List<IssueLink> list() {
-        return new ArrayList<>(links);
+        return repository.listAll();
     }
 
+    @Transactional
     public void add(IssueLink link) {
-        links.add(link);
+        repository.persist(link);
     }
 }

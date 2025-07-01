@@ -16,7 +16,7 @@ class ProjectResourceTest {
         long id = 
             given()
                 .contentType(ContentType.JSON)
-                .body(new ProjectMapping(null, "gitlab", "jira"))
+                .body(makeMapping(null, "gitlab", "jira"))
             .when()
                 .post("/api/projects")
             .then()
@@ -32,7 +32,7 @@ class ProjectResourceTest {
         // update
         given()
             .contentType(ContentType.JSON)
-            .body(new ProjectMapping(id, "g", "j"))
+            .body(makeMapping(id, "g", "j"))
         .when()
             .put("/api/projects/" + id)
         .then()
@@ -52,5 +52,13 @@ class ProjectResourceTest {
             .delete("/api/projects/" + id)
         .then()
             .statusCode(404);
+    }
+
+    private static ProjectMapping makeMapping(Long id, String gitlab, String jira) {
+        ProjectMapping m = new ProjectMapping();
+        m.id = id;
+        m.gitlabProject = gitlab;
+        m.jiraProject = jira;
+        return m;
     }
 }
