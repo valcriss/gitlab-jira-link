@@ -4,3 +4,7 @@ This project synchronizes issues between GitLab and JIRA using a Quarkus backend
 
 The project structure follows a standard Quarkus application layout and requires Java 21 and Maven.
 
+## Current API
+
+- `GET /api/projects` – list configured project mappings
+- `POST /api/projects` – add a new project mapping
