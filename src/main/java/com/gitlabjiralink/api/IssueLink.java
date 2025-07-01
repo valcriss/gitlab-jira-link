@@ -1,3 +1,10 @@
 package com.gitlabjiralink.api;
 
-public record IssueLink(Long gitlabIssueId, String jiraIssueKey) {}
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import jakarta.persistence.Entity;
+
+@Entity
+public class IssueLink extends PanacheEntity {
+    public Long gitlabIssueId;
+    public String jiraIssueKey;
+}
