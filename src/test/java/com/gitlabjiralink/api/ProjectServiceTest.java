@@ -16,13 +16,13 @@ class ProjectServiceTest {
 
     @Test
     void testAddUpdateDelete() {
-        assertEquals(0, repository.count());
+        long before = repository.count();
         ProjectMapping mapping = new ProjectMapping();
         mapping.gitlabProject = "g1";
         mapping.jiraProject = "j1";
         ProjectMapping stored = service.add(mapping);
         assertNotNull(stored.id);
-        assertEquals(1, repository.count());
+        assertEquals(before + 1, repository.count());
 
         ProjectMapping update = new ProjectMapping();
         update.gitlabProject = "g2";
@@ -32,7 +32,7 @@ class ProjectServiceTest {
         assertEquals("g2", updated.gitlabProject);
 
         assertTrue(service.delete(stored.id));
-        assertEquals(0, repository.count());
+        assertEquals(before, repository.count());
     }
 
     @Test
@@ -41,5 +41,17 @@ class ProjectServiceTest {
         update.gitlabProject = "x";
         update.jiraProject = "y";
         assertNull(service.update(999L, update));
+    }
+
+    @Test
+    void testFind() {
+        ProjectMapping mapping = new ProjectMapping();
+        mapping.gitlabProject = "g";
+        mapping.jiraProject = "j";
+        ProjectMapping stored = service.add(mapping);
+        ProjectMapping found = service.find(stored.id);
+        assertNotNull(found);
+        assertEquals("g", found.gitlabProject);
+        assertNull(service.find(999L));
     }
 }
