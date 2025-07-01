@@ -72,7 +72,8 @@ The project is built using **Quarkus**, with a PostgreSQL database for persisten
 ## Project Requirements
 - All commits **must** be validated with a linter corresponding to the project language (Java).
   - No warnings or errors must be present after linting.
-- **Test coverage must be 100%**:
+- **Tests must be run by running "mvn test" command**
+- **Test coverage must be 100%** .
   - Line coverage
   - Branch coverage
   - Method coverage

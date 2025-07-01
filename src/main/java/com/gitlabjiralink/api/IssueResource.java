@@ -6,8 +6,8 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.APIResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 
 import java.util.List;
 
